@@ -29,3 +29,19 @@ def write_to_google(df, path_to_json, sheet_key, sheet_name):
         df_values = df.values.tolist()
         gs.values_append(sheet_name, {'valueInputOption': 'RAW'}, {
                          'values': df_values})
+
+    return True
+
+
+def check_inputs(input_list):
+    for i in input_list:
+        if i == "" or i == None:
+            return False
+        else:
+            return True
+
+
+def alpha_list(relative_path):
+    a_list = sorted(list(pd.read_csv(relative_path)))
+    a_list.insert(0, "")
+    return a_list
