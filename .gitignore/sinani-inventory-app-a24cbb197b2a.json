@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "sinani-inventory-app",
+  "private_key_id": "a24cbb197b2a65aeb427c1d72c80720ce78add8e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCfxtwB2dmBSafS\n9lZnhItLbzRd+CWmvVB8TXDqiN9GoeJqy7FdWcVMp5hi7crLb5zg2vNn+AnU/5qT\noitPUZBPlVsaWqes5xWO6a3PfogfKf7XaCGH7e8+FNSLzXOEPszKVaoN22Ev+c6F\nTF7pNEQalxLCi3IclBGrhxUIol/pJ0TZpZZ2CvJ5d7nnsTXtBsRIO+6LEb7iKeUD\nOjY/3297En2NKiA82K0yQAXFBOHlOTbBUvHGQR3YZWs1KOixuyGqEcovLHxsGTe1\nNcMhYxNixKvFQqf5RCnUA1ox/BaU89sFLIVSwKwTnr88hG8tboBEIY/i7T/54wXT\nmrjUqRgTAgMBAAECggEAT0t08qI4VPbGCGfi99sK+nQFLEG0Be1cnWQdjvhAvyAm\na1QOAUNFLMbcVPSouY/57oobVNT/pCr6fxxznBjhou1/2jN1ldTVmSiV7y1fxv+j\njyoJwhkuq8PQvFVJaC92mVAsZlYjBJlYikUdsWUUC5JAaDamelJt9o/Cu5dCPEZN\nIKqtrinlEv0tjE1p5tzsFulJTTR/8tFUca04eHCZOPlQ1bf5DbP7IL6bZXeKMZrH\nZQngHMyfckL4n4JVWbZol157gNeC1FZ8Za6isQQkPym5BUDlzdzaMQVwZ7PJrYiW\nOfZj8ZJQ4QyVKVFHVNaa2AKAb42b6S/Xfz38svUakQKBgQDLaEZHKzFKG4XCKLg8\nqdknznnmX1LFkZ/er/bAFPVM7RBH0wkyIAXptfcQM94ud8+TKxUGt5qn7kaO3X+F\nTRBT8NTpPA5byQ36UXBjHSYxYDZtOSvT2qJ9nrvY3LyFakZ4+4KgdwFTzrE9zi7O\nuem8GuFZg9+fhoTgHO4P9a4/iQKBgQDJFqNx8vWnCadxMJCy5Qk9hdQyOpuV0wcx\nbRMiIAtcToCR/zp/Grq4LV2qmK0dSBTSkczySQXObmUj/rqkbgsV5rUNWMEMl0pL\noHaHlg4KjuzJqj480eClpxZNEb8IZGBkWvcBcBRs41dR5EiqjHQ7aGdp5sUwAEww\nQINemhh3uwKBgAhnop/GNR8uy/Qd4p7/Fa4DZh4SykTHo6d79eIx+4DWOtn86mBb\n2mKx1iehPQkGglk+anwAki9mNRwqIt7LNGWDigipJp68TAuP2ej+h1l69ETHG/yB\nCD3QlUp8tH1+yrKtEdS3liJ0Y/Z90olQPUw8gBtGy7K3yD3KdDvMlwqhAoGAO718\nBUhW7q8RjbEN6/fbTOnLZri+rD4rbuWmv4ahmWTBEZ6vtD8upbTklOAS3hYiCYTD\nTF+hV/i4F39/14XRyUnnE/YANEtmCR282P8dYMmhUzA+mTcI9G21VGQnSsj3Uhks\nNMMlbkwEDxIw/GoJxfR4dJ/YiTAtclBYNuy0xC0CgYByN7dVkS29UpMXEK1qnsLB\nZr9GS0o0FLS8DYmedp2pz4OZEO1XeoXb5zSEkZxkSn87JBWf8rip1CGPyxM3ol74\nutzw6snQq0TpXr52tTpBK/yvu9MiQYr9xc2D/3W4RiMv8JUx60B1c9EjSCD+Wi3m\nPy6I4kK0MIrgyl6BK8GXBw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "sinani-service-account@sinani-inventory-app.iam.gserviceaccount.com",
+  "client_id": "110110444226654053449",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/sinani-service-account%40sinani-inventory-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
