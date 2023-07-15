@@ -1,0 +1,1 @@
+# sinani-stock-app
