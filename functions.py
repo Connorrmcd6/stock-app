@@ -29,7 +29,7 @@ def write_to_google(df, gcp_service_account, sheet_key, sheet_name):
 
     worksheet = gs.worksheet(sheet_name)
 
-    if len(worksheet.get("A1")) != "Timestamp":
+    if len(worksheet.get("A1")) == None:
         set_with_dataframe(worksheet=worksheet, dataframe=df,
                            include_index=False, include_column_header=True, resize=True)
 
