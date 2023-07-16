@@ -21,9 +21,9 @@ with stock_in:
         with delivery_details:
             st.header("Delivery Details")
             selected_name = st.selectbox(
-                '*Name:', alpha_list(path_to_names))
+                '*Name:', alpha_list(path_to_names,','))
             selected_supplier = st.selectbox(
-                '*Supplier:', alpha_list(path_to_suppliers))
+                '*Supplier:', alpha_list(path_to_suppliers,','))
             selected_invoice = st.text_input('*Invoice/Deleivery Note Number:')
 
             selected_invoice_image = st.file_uploader("Choose an image to upload", type=['png', 'jpeg', 'jpg', 'HEIC'])
@@ -32,7 +32,7 @@ with stock_in:
         with stock_details:
             st.header("Stock Details")
             selected_unit = st.selectbox(
-                "*Stock Unit:", alpha_list(path_to_stock_units))
+                "*Stock Unit:", alpha_list(path_to_stock_units,';'))
             selected_item = st.text_input("*Item:")
             selected_quantity = st.number_input("*Quantity:", min_value=1)
             selected_stock_type = st.selectbox('*Stock Type:', ["", "General Stock", "Site Specific Stock"])
@@ -51,7 +51,7 @@ with stock_in:
                             link = ""
                             st.session_state.link = link
                     
-                    if check_inputs([selected_name, selected_supplier, selected_invoice, selected_unit, selected_item])== False:
+                    if check_inputs([selected_name, selected_supplier, selected_invoice, selected_unit, selected_item, selected_stock_type])== False:
                         st.error('Please fill out all the necessary fields', icon="🚨")
 
                     else:
@@ -59,15 +59,15 @@ with stock_in:
                         if 'data' not in st.session_state:
                             data_obj = {
                                 'Timestamp': [delivery_time],
-                                'Name': [selected_name],
-                                'Stock Unit': [selected_unit],
-                                'Supplier': [selected_supplier],
-                                'Invoice/Deleivery Note Number': [selected_invoice],
-                                'Invoice/Deleivery Note Image': [st.session_state.link],
-                                'Item': [selected_item],
-                                'Quantity': [selected_quantity],
-                                'Notes': [selected_notes],
-                                'Stock Type': [selected_stock_type]
+                                'Name:': [selected_name],
+                                'Stock Unit:': [selected_unit],
+                                'Supplier:': [selected_supplier],
+                                'Item:': [selected_item],
+                                'Quantity:': [selected_quantity],
+                                'Notes:': [selected_notes],
+                                'Invoice/Delivery Note Number:': [selected_invoice],
+                                'Invoice/Delivery Note:': [st.session_state.link],
+                                'Stock Type:': [selected_stock_type]
                             }
 
                             data = pd.DataFrame(data_obj)
@@ -77,15 +77,15 @@ with stock_in:
                         else:
                             data_obj = {
                                 'Timestamp': [delivery_time],
-                                'Name': [selected_name],
-                                'Stock Unit': [selected_unit],
-                                'Supplier': [selected_supplier],
-                                'Invoice/Deleivery Note Number': [selected_invoice],
-                                'Invoice/Deleivery Note Image': [st.session_state.link],
-                                'Item': [selected_item],
-                                'Quantity': [selected_quantity],
-                                'Notes': [selected_notes],
-                                'Stock Type': [selected_stock_type]
+                                'Name:': [selected_name],
+                                'Stock Unit:': [selected_unit],
+                                'Supplier:': [selected_supplier],
+                                'Item:': [selected_item],
+                                'Quantity:': [selected_quantity],
+                                'Notes:': [selected_notes],
+                                'Invoice/Delivery Note Number:': [selected_invoice],
+                                'Invoice/Delivery Note:': [st.session_state.link],
+                                'Stock Type:': [selected_stock_type]
                             }
 
                             data = pd.DataFrame(data_obj)

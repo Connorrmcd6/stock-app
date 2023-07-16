@@ -47,8 +47,8 @@ def check_inputs(input_list):
             return True
 
 
-def alpha_list(relative_path):
-    a_list = sorted(list(pd.read_csv(relative_path)))
+def alpha_list(relative_path, sep):
+    a_list = sorted(list(pd.read_csv(relative_path, sep=sep)))
     a_list.insert(0, "")
     return a_list
 
