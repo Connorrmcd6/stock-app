@@ -58,16 +58,16 @@ with stock_in:
 
                         if 'data' not in st.session_state:
                             data_obj = {
-                                'Timestamp': [delivery_time],
-                                'Name:': [selected_name],
-                                'Stock Unit:': [selected_unit],
-                                'Supplier:': [selected_supplier],
-                                'Item:': [selected_item],
-                                'Quantity:': [selected_quantity],
-                                'Notes:': [selected_notes],
-                                'Invoice/Delivery Note Number:': [selected_invoice],
-                                'Invoice/Delivery Note:': [st.session_state.link],
-                                'Stock Type:': [selected_stock_type]
+                                'Timestamp': [str(delivery_time)],
+                                'Name:': [str(selected_name)],
+                                'Stock Unit:': [str(selected_unit)],
+                                'Supplier:': [str(selected_supplier)],
+                                'Item:': [str(selected_item)],
+                                'Quantity:': [str(selected_quantity)],
+                                'Notes:': [str(selected_notes)],
+                                'Invoice/Delivery Note Number:': [str(selected_invoice)],
+                                'Invoice/Delivery Note:': [str(st.session_state.link)],
+                                'Stock Type:': [str(selected_stock_type)]
                             }
 
                             data = pd.DataFrame(data_obj)
@@ -76,16 +76,16 @@ with stock_in:
 
                         else:
                             data_obj = {
-                                'Timestamp': [delivery_time],
-                                'Name:': [selected_name],
-                                'Stock Unit:': [selected_unit],
-                                'Supplier:': [selected_supplier],
-                                'Item:': [selected_item],
-                                'Quantity:': [selected_quantity],
-                                'Notes:': [selected_notes],
-                                'Invoice/Delivery Note Number:': [selected_invoice],
-                                'Invoice/Delivery Note:': [st.session_state.link],
-                                'Stock Type:': [selected_stock_type]
+                                'Timestamp': [str(delivery_time)],
+                                'Name:': [str(selected_name)],
+                                'Stock Unit:': [str(selected_unit)],
+                                'Supplier:': [str(selected_supplier)],
+                                'Item:': [str(selected_item)],
+                                'Quantity:': [str(selected_quantity)],
+                                'Notes:': [str(selected_notes)],
+                                'Invoice/Delivery Note Number:': [str(selected_invoice)],
+                                'Invoice/Delivery Note:': [str(st.session_state.link)],
+                                'Stock Type:': [str(selected_stock_type)]
                             }
 
                             data = pd.DataFrame(data_obj)
