@@ -17,7 +17,7 @@ parent_folder_key = '1o8yh0kgc-M3HqZQU_KlUHE9KtYKpCYkhw8rpra-AgK2JRSsee5SI-6AP4o
 sheet_key = '1XdljCZyE4NpHjr5AIsEzTFM-EAaB6r8OGi_MYsUqT4g'
 
 
-sheet_name = 'Stock '
+sheet_name = 'Stock In:'
 
 #stock in configs
 path_to_names = './stock_in_configs/names.csv'
