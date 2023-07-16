@@ -1,6 +1,5 @@
 #configs
 service_account_configs
-stock_in_configs
 
 #cache
 __pycache__
