@@ -5,7 +5,7 @@ import numpy as np
 from functions import write_to_google, check_inputs, alpha_list, upload_to_drive, save_uploadedfile, clear_image_cache
 from configs import *
 
-st.set_page_config(page_title='Sinani Inventory',
+st.set_page_config(page_title='Sinani Inventory App',
                    layout='wide', initial_sidebar_state='collapsed')
 
 
