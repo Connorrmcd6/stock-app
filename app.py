@@ -1,7 +1,6 @@
 import streamlit as st
-from datetime import datetime
+from datetime import datetime, timedelta
 import pandas as pd
-import numpy as np
 from functions import write_to_google, check_inputs, alpha_list, upload_to_drive, save_uploadedfile, clear_image_cache
 from configs import *
 
@@ -37,8 +36,7 @@ with stock_in:
             selected_item = st.text_input("*Item:")
             selected_quantity = st.number_input("*Quantity:", min_value=1)
             selected_notes = st.text_input("Notes:")
-            delivery_time = datetime.now().strftime("%d/%m/%y %H:%M:%S")
-
+            delivery_time = (datetime.now() + timedelta(hours=2)).strftime("%d/%m/%y %H:%M:%S")
 
             if st.button('Add Item'):
                 with st.spinner('Uploading image...'):
