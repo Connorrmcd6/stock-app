@@ -35,6 +35,7 @@ with stock_in:
                 "*Stock Unit:", alpha_list(path_to_stock_units))
             selected_item = st.text_input("*Item:")
             selected_quantity = st.number_input("*Quantity:", min_value=1)
+            selected_stock_type = st.selectbox('*Stock Type:', ["", "General Stock", "Site Specific Stock"])
             selected_notes = st.text_input("Notes:")
             delivery_time = (datetime.now() + timedelta(hours=2)).strftime("%d/%m/%y %H:%M:%S")
 
@@ -65,7 +66,8 @@ with stock_in:
                                 'Invoice/Deleivery Note Image': [st.session_state.link],
                                 'Item': [selected_item],
                                 'Quantity': [selected_quantity],
-                                'Notes': [selected_notes]
+                                'Notes': [selected_notes],
+                                'Stock Type': [selected_stock_type]
                             }
 
                             data = pd.DataFrame(data_obj)
@@ -82,7 +84,8 @@ with stock_in:
                                 'Invoice/Deleivery Note Image': [st.session_state.link],
                                 'Item': [selected_item],
                                 'Quantity': [selected_quantity],
-                                'Notes': [selected_notes]
+                                'Notes': [selected_notes],
+                                'Stock Type': [selected_stock_type]
                             }
 
                             data = pd.DataFrame(data_obj)
