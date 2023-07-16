@@ -12,11 +12,12 @@ from googleapiclient.http import MediaFileUpload
 import configs
 
 
-def write_to_google(df, path_to_json, sheet_key, sheet_name):
-    scopes = ['https://www.googleapis.com/auth/spreadsheets',
-              'https://www.googleapis.com/auth/drive']
-    credentials = Credentials.from_service_account_file(
-        path_to_json, scopes=scopes)
+def write_to_google(df, gcp_service_account, sheet_key, sheet_name):
+    
+    scopes = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
+    
+    credentials = service_account.Credentials.from_service_account_info(gcp_service_account, scopes= scopes)
+    
     gc = gspread.authorize(credentials)
     gauth = GoogleAuth()
     drive = GoogleDrive(gauth)
@@ -52,10 +53,10 @@ def alpha_list(relative_path):
     return a_list
 
 
-def upload_to_drive(path_to_json, parent_folder_key, file_name, file_path):
+def upload_to_drive(gcp_service_account, parent_folder_key, file_name, file_path):
     scope = ['https://www.googleapis.com/auth/drive']
-    credentials = service_account.Credentials.from_service_account_file(
-        filename=path_to_json, scopes=scope)
+    # credentials = service_account.Credentials.from_service_account_file(filename=path_to_json, scopes=scope)
+    credentials = service_account.Credentials.from_service_account_info(gcp_service_account, scopes= scope)
     service = build('drive', 'v3', credentials=credentials)
     file_metadata = {'name': file_name, 'parents': [parent_folder_key]}
     media = MediaFileUpload(file_path, mimetype='image/png')

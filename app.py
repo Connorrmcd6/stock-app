@@ -46,7 +46,7 @@ with stock_in:
                         if selected_invoice_image is not None:
                             save_uploadedfile(selected_invoice_image)
                             path = f'./image_cache/{selected_invoice_image.name}'
-                            link = upload_to_drive(path_to_json, parent_folder_key, selected_invoice_image.name, path)
+                            link = upload_to_drive(st.secrets["gcp_service_account"], parent_folder_key, selected_invoice_image.name, path)
                             st.session_state.link = link
                         else:
                             link = ""
@@ -105,7 +105,7 @@ with stock_in:
             if st.button('Submit'):
                 with st.spinner(text="Uploading to google sheets..."):
                     data = st.session_state.data
-                    if write_to_google(data, path_to_json, sheet_key, sheet_name):
+                    if write_to_google(data, st.secrets["gcp_service_account"], sheet_key, sheet_name):
                         st.success('Delivery Captured', icon="✅")
                         st.session_state.data = None
                         clear_image_cache('./image_cache')
@@ -121,7 +121,7 @@ with stock_in:
                 if st.button('Submit'):
                     with st.spinner(text="Uploading to google sheets..."):
                         data = st.session_state.data
-                        if write_to_google(data, path_to_json, sheet_key, sheet_name):
+                        if write_to_google(data, st.secrets["gcp_service_account"], sheet_key, sheet_name):
                             st.success('Delivery Captured', icon="✅")
                             st.session_state.data = None
                             clear_image_cache('./image_cache')
