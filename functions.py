@@ -1,9 +1,14 @@
 import pandas as pd
+import streamlit as st
+import os
 import gspread
 from gspread_dataframe import set_with_dataframe
 from google.oauth2.service_account import Credentials
+from google.oauth2 import service_account
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
 import configs
 
 
@@ -45,3 +50,30 @@ def alpha_list(relative_path):
     a_list = sorted(list(pd.read_csv(relative_path)))
     a_list.insert(0, "")
     return a_list
+
+
+def upload_to_drive(path_to_json, parent_folder_key, file_name, file_path):
+    scope = ['https://www.googleapis.com/auth/drive']
+    credentials = service_account.Credentials.from_service_account_file(
+        filename=path_to_json, scopes=scope)
+    service = build('drive', 'v3', credentials=credentials)
+    file_metadata = {'name': file_name, 'parents': [parent_folder_key]}
+    media = MediaFileUpload(file_path, mimetype='image/png')
+    file = service.files().create(body=file_metadata,
+                                  media_body=media, fields='id').execute()
+    link = '{url}'.format(
+        url='https://drive.google.com/open?id=' + file.get('id'))
+
+    return link
+
+
+def save_uploadedfile(uploadedfile):
+     with open(os.path.join("image_cache",uploadedfile.name),"wb") as f:
+         f.write(uploadedfile.getbuffer())
+         path = f'./image_cache/{uploadedfile.name}'
+     return path
+
+
+def clear_image_cache(path):
+    for f in os.listdir(path):
+        os.remove(os.path.join(path, f))

@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 import pandas as pd
 import numpy as np
-from functions import write_to_google, check_inputs, alpha_list
+from functions import write_to_google, check_inputs, alpha_list, upload_to_drive, save_uploadedfile, clear_image_cache
 from configs import *
 
 st.set_page_config(page_title='Sinani Inventory',
@@ -18,7 +18,7 @@ with stock_in:
     preview_container = st.container()
 
     with form_container:
-        delivery_details, spacer, stock_details = st.columns([1, 0.5, 2])
+        delivery_details, spacer, stock_details = st.columns([1, 0.5, 1])
         with delivery_details:
             st.header("Delivery Details")
             selected_name = st.selectbox(
@@ -26,8 +26,9 @@ with stock_in:
             selected_supplier = st.selectbox(
                 '*Supplier:', alpha_list(path_to_suppliers))
             selected_invoice = st.text_input('*Invoice/Deleivery Note Number:')
-            selected_invoice_image = st.text_input(
-                'Invoice/Delivery Note Image:')  # change to file uploader
+
+            selected_invoice_image = st.file_uploader("Choose an image to upload", type=['png', 'jpeg', 'jpg', 'HEIC'])
+
 
         with stock_details:
             st.header("Stock Details")
@@ -40,45 +41,55 @@ with stock_in:
 
 
             if st.button('Add Item'):
-                
-                if check_inputs([selected_name, selected_supplier, selected_invoice, selected_unit, selected_item])== False:
-                    st.error('Please fill out all the necessary fields', icon="🚨")
-
-                else:
-
-                    if 'data' not in st.session_state:
-                        data_obj = {
-                            'Timestamp': [delivery_time],
-                            'Name': [selected_name],
-                            'Stock Unit': [selected_unit],
-                            'Supplier': [selected_supplier],
-                            'Invoice/Deleivery Note Number': [selected_invoice],
-                            'Invoice/Deleivery Note Image': [selected_invoice_image],
-                            'Item': [selected_item],
-                            'Quantity': [selected_quantity],
-                            'Notes': [selected_notes]
-                        }
-
-                        data = pd.DataFrame(data_obj)
-                        st.session_state.data = data
-
+                with st.spinner('Uploading image...'):
+                    if "link" not in st.session_state:
+                        if selected_invoice_image is not None:
+                            save_uploadedfile(selected_invoice_image)
+                            path = f'./image_cache/{selected_invoice_image.name}'
+                            link = upload_to_drive(path_to_json, parent_folder_key, selected_invoice_image.name, path)
+                            st.session_state.link = link
+                        else:
+                            link = ""
+                            st.session_state.link = link
+                    
+                    if check_inputs([selected_name, selected_supplier, selected_invoice, selected_unit, selected_item])== False:
+                        st.error('Please fill out all the necessary fields', icon="🚨")
 
                     else:
-                        data_obj = {
-                            'Timestamp': [delivery_time],
-                            'Name': [selected_name],
-                            'Stock Unit': [selected_unit],
-                            'Supplier': [selected_supplier],
-                            'Invoice/Deleivery Note Number': [selected_invoice],
-                            'Invoice/Deleivery Note Image': [selected_invoice_image],
-                            'Item': [selected_item],
-                            'Quantity': [selected_quantity],
-                            'Notes': [selected_notes]
-                        }
 
-                        data = pd.DataFrame(data_obj)
-                        st.session_state.data = pd.concat(
-                            [st.session_state.data, data])
+                        if 'data' not in st.session_state:
+                            data_obj = {
+                                'Timestamp': [delivery_time],
+                                'Name': [selected_name],
+                                'Stock Unit': [selected_unit],
+                                'Supplier': [selected_supplier],
+                                'Invoice/Deleivery Note Number': [selected_invoice],
+                                'Invoice/Deleivery Note Image': [st.session_state.link],
+                                'Item': [selected_item],
+                                'Quantity': [selected_quantity],
+                                'Notes': [selected_notes]
+                            }
+
+                            data = pd.DataFrame(data_obj)
+                            st.session_state.data = data
+
+
+                        else:
+                            data_obj = {
+                                'Timestamp': [delivery_time],
+                                'Name': [selected_name],
+                                'Stock Unit': [selected_unit],
+                                'Supplier': [selected_supplier],
+                                'Invoice/Deleivery Note Number': [selected_invoice],
+                                'Invoice/Deleivery Note Image': [st.session_state.link],
+                                'Item': [selected_item],
+                                'Quantity': [selected_quantity],
+                                'Notes': [selected_notes]
+                            }
+
+                            data = pd.DataFrame(data_obj)
+                            st.session_state.data = pd.concat(
+                                [st.session_state.data, data])
 
 
     with preview_container:
@@ -97,6 +108,7 @@ with stock_in:
                     if write_to_google(data, path_to_json, sheet_key, sheet_name):
                         st.success('Delivery Captured', icon="✅")
                         st.session_state.data = None
+                        clear_image_cache('./image_cache')
                     else:
                         st.error('Something went wrong...',icon="🚨")
 
@@ -112,6 +124,7 @@ with stock_in:
                         if write_to_google(data, path_to_json, sheet_key, sheet_name):
                             st.success('Delivery Captured', icon="✅")
                             st.session_state.data = None
+                            clear_image_cache('./image_cache')
                         else:
                             st.error('Something went wrong...',icon="🚨")
 
