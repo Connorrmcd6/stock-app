@@ -13,11 +13,13 @@ import configs
 
 
 def write_to_google(df, gcp_service_account, sheet_key, sheet_name):
-    
-    scopes = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
-    
-    credentials = service_account.Credentials.from_service_account_info(gcp_service_account, scopes= scopes)
-    
+
+    scopes = ['https://www.googleapis.com/auth/spreadsheets',
+              'https://www.googleapis.com/auth/drive']
+
+    credentials = service_account.Credentials.from_service_account_info(
+        gcp_service_account, scopes=scopes)
+
     gc = gspread.authorize(credentials)
     gauth = GoogleAuth()
     drive = GoogleDrive(gauth)
@@ -27,7 +29,7 @@ def write_to_google(df, gcp_service_account, sheet_key, sheet_name):
 
     worksheet = gs.worksheet(sheet_name)
 
-    if len(worksheet.get("A1")) == 0:
+    if len(worksheet.get("A2")) == 0:
         set_with_dataframe(worksheet=worksheet, dataframe=df,
                            include_index=False, include_column_header=True, resize=True)
 
@@ -56,7 +58,8 @@ def alpha_list(relative_path, sep):
 def upload_to_drive(gcp_service_account, parent_folder_key, file_name, file_path):
     scope = ['https://www.googleapis.com/auth/drive']
     # credentials = service_account.Credentials.from_service_account_file(filename=path_to_json, scopes=scope)
-    credentials = service_account.Credentials.from_service_account_info(gcp_service_account, scopes= scope)
+    credentials = service_account.Credentials.from_service_account_info(
+        gcp_service_account, scopes=scope)
     service = build('drive', 'v3', credentials=credentials)
     file_metadata = {'name': file_name, 'parents': [parent_folder_key]}
     media = MediaFileUpload(file_path, mimetype='image/png')
@@ -69,10 +72,10 @@ def upload_to_drive(gcp_service_account, parent_folder_key, file_name, file_path
 
 
 def save_uploadedfile(uploadedfile):
-     with open(os.path.join("image_cache",uploadedfile.name),"wb") as f:
-         f.write(uploadedfile.getbuffer())
-         path = f'./image_cache/{uploadedfile.name}'
-     return path
+    with open(os.path.join("image_cache", uploadedfile.name), "wb") as f:
+        f.write(uploadedfile.getbuffer())
+        path = f'./image_cache/{uploadedfile.name}'
+    return path
 
 
 def clear_image_cache(path):
